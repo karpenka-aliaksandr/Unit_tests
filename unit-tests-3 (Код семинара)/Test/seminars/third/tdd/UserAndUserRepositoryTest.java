@@ -51,6 +51,25 @@ public class UserAndUserRepositoryTest {
         assertFalse(userRepository.findByName("user"));
     }
 
+    @Test
+    void unloginUsersWithoutIsAdminNotFindUser(){
+        user.authenticate("User", "pass");
+        admin.authenticate("Admin", "admin");
+        userRepository.addUser(user);
+        userRepository.addUser(admin);
+        userRepository.unloginUsersWithoutIsAdmin();
+        assertFalse(userRepository.findByName("User"));
+    }
+
+    @Test
+    void unloginUsersWithoutIsAdminFindAdmin(){
+        user.authenticate("User", "pass");
+        admin.authenticate("Admin", "admin");
+        userRepository.addUser(user);
+        userRepository.addUser(admin);
+        userRepository.unloginUsersWithoutIsAdmin();
+        assertTrue(userRepository.findByName("Admin"));
+    }
 
 
 }

@@ -2,6 +2,7 @@ package seminars.third.tdd;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserRepository {
 
@@ -20,6 +21,16 @@ public class UserRepository {
             }
         }
         return false;
+    }
+
+    public void unloginUsersWithoutIsAdmin(){
+        for (User user: data) {
+            System.out.println(user);
+        }
+        data = data.stream().filter(user -> user.isAdmin = true).collect(Collectors.toList());
+        for (User user: data) {
+            System.out.println(user);
+        }
     }
 
 }
